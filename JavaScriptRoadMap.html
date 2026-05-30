@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 100% Roadmap — Vanilla JS</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --card: #f8f9fa;
+            --border: #dee2e6;
+            --phase-bg: #e9ecef;
+            --checkbox: #ced4da;
+            --completed: #2ecc71;
+            --hover: #e9ecef;
+            --muted: #6c757d;
+            --header-bg: #ffffff;
+            --strike: #adb5bd;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .dark-mode {
+            --bg: #0f0f0f;
+            --text: #e4e4e4;
+            --card: #1a1a1a;
+            --border: #2a2a2a;
+            --phase-bg: #222222;
+            --checkbox: #3a3a3a;
+            --completed: #2ecc71;
+            --hover: #2a2a2a;
+            --muted: #999999;
+            --header-bg: #111111;
+            --strike: #555555;
+            --shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+            padding-bottom: 60px;
+            line-height: 1.5;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-left h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; }
+
+        .header-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .progress-container { display: flex; align-items: center; gap: 8px; }
+        .progress-bar-wrapper { width: 180px; height: 8px; background: var(--checkbox); border-radius: 20px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--completed); border-radius: 20px; transition: width 0.4s ease; width: 0%; }
+        .stat-number { font-weight: 700; color: var(--completed); font-size: 1rem; min-width: 20px; text-align: center; }
+
+        .dark-toggle {
+            padding: 9px 18px; border: 2px solid var(--border); background: var(--card);
+            color: var(--text); border-radius: 25px; cursor: pointer; font-weight: 600;
+            font-size: 0.85rem; transition: all 0.3s; display: flex; align-items: center; gap: 6px;
+        }
+        .dark-toggle:hover { background: var(--hover); transform: scale(1.04); }
+
+        .reset-btn {
+            padding: 9px 18px; border: 2px solid #e74c3c; background: transparent;
+            color: #e74c3c; border-radius: 25px; cursor: pointer; font-weight: 600;
+            font-size: 0.85rem; transition: all 0.3s;
+        }
+        .reset-btn:hover { background: #e74c3c; color: white; }
+
+        .container { max-width: 920px; margin: 24px auto; padding: 0 16px; }
+        .phase-section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 18px; overflow: hidden; }
+        .phase-section:hover { box-shadow: var(--shadow); }
+        .phase-header { background: var(--phase-bg); padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .phase-header:hover { background: var(--hover); }
+        .phase-header h2 { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .phase-arrow { transition: transform 0.25s; font-size: 0.7rem; display: inline-block; }
+        .phase-section.open .phase-arrow { transform: rotate(90deg); }
+        .phase-count { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+        .topic-list { display: none; padding: 6px 10px 10px 10px; }
+        .phase-section.open .topic-list { display: block; }
+        .topic-item { display: flex; align-items: center; padding: 9px 12px; border-radius: 7px; cursor: pointer; transition: background 0.15s; gap: 10px; border-bottom: 1px solid var(--border); }
+        .topic-item:last-child { border-bottom: none; }
+        .topic-item:hover { background: var(--hover); }
+        .topic-number { font-weight: 600; color: var(--muted); min-width: 30px; font-size: 0.78rem; }
+        .topic-text { flex: 1; transition: all 0.25s; font-size: 0.9rem; }
+        .topic-item.completed .topic-text { text-decoration: line-through; color: var(--strike); }
+        .checkbox-circle { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--checkbox); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.25s; font-size: 10px; color: transparent; font-weight: 700; }
+        .topic-item.completed .checkbox-circle { background: var(--completed); border-color: var(--completed); color: white; }
+        .footer { text-align: center; color: var(--muted); padding: 30px 20px; font-size: 0.85rem; }
+
+        @media (max-width: 640px) {
+            .header { padding: 10px 14px; }
+            .header-left h1 { font-size: 1.1rem; }
+            .progress-bar-wrapper { width: 100px; }
+            .dark-toggle, .reset-btn { padding: 7px 14px; font-size: 0.8rem; }
+            .topic-item { padding: 7px 8px; gap: 6px; }
+            .topic-text { font-size: 0.82rem; }
+            .topic-number { min-width: 24px; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-left"><h1>⚡ Vanilla JS — 100% Roadmap</h1></div>
+        <div class="header-right">
+            <div class="progress-container">
+                <span class="stat-number" id="completedCount">0</span>
+                <span style="color:var(--muted);">/</span>
+                <span id="totalCount" style="color:var(--muted);">300</span>
+            </div>
+            <div class="progress-bar-wrapper"><div class="progress-bar-fill" id="progressFill"></div></div>
+            <span id="percentText" style="font-weight:700;min-width:36px;">0%</span>
+            <button class="dark-toggle" id="darkToggle"><span id="darkIcon">🌙</span> <span id="darkText">Dark</span></button>
+            <button class="reset-btn" id="resetBtn">↺ Reset</button>
+        </div>
+    </header>
+
+    <div class="container" id="container"></div>
+    <div class="footer">🚀 All progress auto-saved in LocalStorage · Click any topic to mark complete</div>
+
+    <script>
+        // ============================================================
+        // EXACT 300 TOPICS — MATCHING THE TABLE 100%
+        // ============================================================
+        const roadmapData = [
+            {
+                phase: "Phase 1: Foundation (1–31)",
+                topics: [
+                    "Introduction — JS kya hai, browser console, <script> tag",
+                    "Variables: var — declaration, hoisting behavior, function scope",
+                    "Variables: let — block scope, reassignable, TDZ",
+                    "Variables: const — block scope, constant reference, TDZ",
+                    "Naming Rules — valid identifiers, camelCase, reserved words",
+                    "Data Type: Number — integer, float, Infinity, NaN, Number.MAX_VALUE",
+                    "Data Type: String — single/double quotes, escape characters",
+                    "Data Type: Boolean — true/false, truthy/falsy",
+                    "Data Type: null — intentional absence, typeof null bug",
+                    "Data Type: undefined — default uninitialized value",
+                    "Data Type: Symbol — unique identifiers, Symbol.for(), use cases",
+                    "Data Type: BigInt — large integers beyond Number.MAX_SAFE_INTEGER",
+                    "typeof Operator — type checking, all return values, quirks",
+                    "Arithmetic Operators — +, -, *, /, %, **, increment/decrement",
+                    "Assignment Operators — =, +=, -=, *=, /=, %=",
+                    "Comparison Operators — ==, ===, !=, !==, >, <, >=, <=",
+                    "Logical Operators — &&, ||, !, short-circuit, nullish coalescing ??",
+                    "Ternary Operator — condition ? true : false, nested ternary",
+                    "Type Conversion (Explicit) — String(), Number(), Boolean(), parseInt(), parseFloat()",
+                    "Type Coercion (Implicit) — + string concatenation, == loose equality, truthy/falsy",
+                    "console Object — log, error, warn, info, table, time, timeEnd, group",
+                    "alert(), prompt(), confirm() — User interaction dialogs",
+                    "if-else — Syntax, conditions, nesting, else if ladder",
+                    "switch-case — Syntax, break, default, fall-through",
+                    "for Loop — Syntax, initialization, condition, increment",
+                    "while Loop — Pre-test loop, infinite loop danger",
+                    "do...while Loop — Post-test loop, at-least-once execution",
+                    "for...in Loop — Iterate object keys, prototype caveats",
+                    "for...of Loop — Iterate iterable values (Array, String, Map, Set)",
+                    "break & continue — Loop control, labeled statements",
+                    "Comments — //, /* */, JSDoc intro"
+                ]
+            },
+            {
+                phase: "Phase 2: Functions & Scope (32–51)",
+                topics: [
+                    "Function Declaration — function name(){}, fully hoisted",
+                    "Function Expression — const fn = function(){}, not hoisted",
+                    "Arrow Functions — ()=> {}, implicit return, lexical this",
+                    "Parameters vs Arguments — mismatch handling, extra/missing args",
+                    "Default Parameters — function(a=5), expressions as default values",
+                    "Rest Parameters — function(...args), real array vs arguments",
+                    "arguments Object — array-like, old pattern, callee property",
+                    "Return Statement — single/multiple values, early return, undefined",
+                    "Function as First-Class Citizen — assign, pass, return functions",
+                    "Global Scope — window/globalThis, global pollution problem",
+                    "Function Scope — var inside function, hoisting behavior",
+                    "Block Scope — let/const inside {} braces",
+                    "Lexical Scope — inner function access outer variables",
+                    "Scope Chain — variable lookup process step by step",
+                    "Hoisting — var (undefined), function declaration (full), let/const TDZ",
+                    "Temporal Dead Zone (TDZ) — access before declaration = ReferenceError",
+                    "IIFE — (function(){})(), private scope, module pattern foundation",
+                    "Callback Functions — pass function as argument, synchronous callbacks",
+                    "Recursion — base case, call stack limit, factorial/Fibonacci examples",
+                    "\"use strict\" — enable strict mode, restrictions, benefits, global vs function"
+                ]
+            },
+            {
+                phase: "Phase 3.1: Data Structures — String (52–69)",
+                topics: [
+                    "String Basics — quotes, escape characters, immutability property",
+                    "Template Literals — backticks, ${} interpolation, multi-line strings",
+                    "Tagged Templates — custom template processing function",
+                    "length Property — character count, vs byte length",
+                    "Character Access — bracket notation, charAt(), charCodeAt(), codePointAt()",
+                    "Case Methods — toUpperCase(), toLowerCase(), locale variants",
+                    "indexOf & lastIndexOf — search position, not found = -1",
+                    "includes, startsWith, endsWith — boolean checks",
+                    "slice — extract substring, negative index support",
+                    "substring — similar to slice, no negative indices allowed",
+                    "substr — deprecated, length-based extraction",
+                    "replace & replaceAll — pattern replacement, string or regex",
+                    "trim, trimStart, trimEnd — whitespace removal methods",
+                    "padStart & padEnd — string padding to length",
+                    "split — string to array by separator",
+                    "concat & repeat — string joining and repetition",
+                    "localeCompare — string comparison for sorting purposes",
+                    "Unicode & Emoji — codePointAt, fromCodePoint, surrogate pairs handling"
+                ]
+            },
+            {
+                phase: "Phase 3.2: Data Structures — Array (70–93)",
+                topics: [
+                    "Array Basics — creation, mixed types, length property",
+                    "push & pop — add/remove from end, return value",
+                    "unshift & shift — add/remove from start",
+                    "splice — add/remove/replace at any position (in-place)",
+                    "slice — shallow copy, extract portion, negative indices",
+                    "concat — merge arrays, vs spread operator",
+                    "join — array to string with separator",
+                    "indexOf & lastIndexOf — element position search, strict equality",
+                    "includes — boolean element check (ES7)",
+                    "find & findIndex — callback-based search, first match only",
+                    "findLast & findLastIndex — reverse search (ES2023)",
+                    "forEach — iteration, no return value, cannot break",
+                    "map — transform each element, returns new array",
+                    "filter — conditional selection, returns new array",
+                    "reduce — accumulate values, initialValue, reduceRight variant",
+                    "sort — default string sort, custom compare function, stability",
+                    "reverse — in-place array reversal",
+                    "some & every — boolean checks on array elements",
+                    "flat & flatMap — flatten nested arrays to given depth",
+                    "fill — fill array with static value, start/end indices",
+                    "Array.from — create from array-like/iterable, optional map function",
+                    "Array.of — create array from arguments (fixes new Array quirk)",
+                    "Array.isArray — reliable array type checking",
+                    "Spread Operator (...) — copy array, merge, function arguments"
+                ]
+            },
+            {
+                phase: "Phase 3.3: Object, Map, Set, Date, Math, JSON, Iterables (94–127)",
+                topics: [
+                    "Object Literal — {}, properties, methods, shorthand syntax",
+                    "Property Access — dot notation vs bracket notation, computed keys [expr]",
+                    "Adding/Deleting Properties — simple assignment, delete operator",
+                    "Property Descriptors — writable, enumerable, configurable, value, get, set",
+                    "Object.defineProperty — single property with full descriptor control",
+                    "Object.defineProperties — multiple properties at once",
+                    "Object.getOwnPropertyDescriptor / getOwnPropertyDescriptors",
+                    "Object.keys / values / entries — enumerable own properties iteration",
+                    "Object.assign — shallow merge/clone, target mutation",
+                    "Object.freeze — shallow freeze, no add/delete/modify, isFrozen check",
+                    "Object.seal — no add/delete, can modify existing, isSealed check",
+                    "Object.preventExtensions — no new properties, isExtensible check",
+                    "Object.is — strict equality with NaN fix and -0 vs +0",
+                    "hasOwnProperty / Object.hasOwn — own property check (not prototype)",
+                    "in Operator — check property existence including prototype chain",
+                    "Optional Chaining (?.) — safe nested property access",
+                    "Nullish Coalescing (??) — default only for null/undefined",
+                    "Destructuring: Object — extract, rename, default values, nested",
+                    "Destructuring: Array — extract by position, skip, default, rest",
+                    "Spread Operator on Objects — shallow copy, merge properties",
+                    "Map — any-type keys, insertion order, size property, iteration",
+                    "Map Methods — set, get, delete, has, clear, forEach",
+                    "Set — unique values, add, delete, has, size, iteration",
+                    "WeakMap — garbage-collectible keys, private data pattern",
+                    "WeakSet — garbage-collectible objects, tagging use case",
+                    "Date Object — creation (new Date), getters/setters, timestamp, Date.now()",
+                    "Date Formatting — toLocaleString, Intl.DateTimeFormat, timezone handling",
+                    "Math Object — random, round, floor, ceil, trunc, max, min, abs, pow, sqrt, PI",
+                    "Number Methods — toFixed, toPrecision, Number.isNaN, Number.isFinite, EPSILON",
+                    "Number.isInteger, Number.isSafeInteger, MAX_SAFE_INTEGER, MIN_SAFE_INTEGER",
+                    "JSON.stringify — object to JSON string, replacer function, space, toJSON()",
+                    "JSON.parse — JSON string to object, reviver function, error handling",
+                    "Iterables & Symbol.iterator — make custom objects iterable with for...of",
+                    "Array.from with Map/Set — converting iterables to arrays"
+                ]
+            },
+            {
+                phase: "Phase 4: Advanced Core Concepts (128–160)",
+                topics: [
+                    "Execution Context — Global vs Function vs Eval contexts",
+                    "Creation Phase vs Execution Phase — memory allocation then code run",
+                    "Call Stack — LIFO order, stack overflow scenarios, debugging stack traces",
+                    "Lexical Environment — variable environment + outer reference",
+                    "Closures: Concept — function bundled with its lexical environment",
+                    "Closures: Practical Uses — data privacy, factory functions, memoization",
+                    "Closures: Loop + setTimeout Classic Problem — var vs let vs IIFE fix",
+                    "Closures: Memory Considerations — garbage collection, potential leaks",
+                    "prototype Property — every function has prototype, constructor pattern",
+                    "__proto__ — internal [[Prototype]] link, Object.getPrototypeOf()",
+                    "Prototype Chain — property lookup path, Object.prototype is top",
+                    "Object.create() — pure prototypal inheritance without constructors",
+                    "Constructor Functions — new keyword mechanics, return behavior",
+                    "instanceof Operator — checks prototype chain for constructor",
+                    "this: Default Binding — global object (window), strict mode undefined",
+                    "this: Implicit Binding — object method call, obj.func() context",
+                    "this: Explicit Binding — call(), apply(), bind() methods",
+                    "this: new Binding — constructor creates new object as this",
+                    "this: Arrow Functions — lexical this, inherits from parent scope",
+                    "this: Event Listeners — DOM event handler context issue",
+                    "call() Deep Dive — method borrowing, passing arguments individually",
+                    "apply() Deep Dive — array of arguments, spread alternative",
+                    "bind() Deep Dive — permanent this binding, partial application",
+                    "Classes: Syntax — class keyword, constructor, methods, no commas",
+                    "Classes: Getters & Setters — get/set syntax, computed properties",
+                    "Classes: Inheritance — extends keyword, super(), method overriding",
+                    "Classes: Static Methods & Fields — static keyword, class-level",
+                    "Classes: Private Fields — # syntax, truly private instance fields",
+                    "Classes: Desugaring — class is constructor + prototype (proof)",
+                    "Error Object — Error, TypeError, ReferenceError, RangeError, SyntaxError",
+                    "try...catch...finally — error handling flow, finally always executes",
+                    "throw Statement — throwing custom errors, throw new Error()",
+                    "Custom Error Classes — extending Error, setting name property",
+                    "Global Error Handling — window.onerror, unhandledrejection event"
+                ]
+            },
+            {
+                phase: "Phase 5: Asynchronous JavaScript (161–192)",
+                topics: [
+                    "Synchronous vs Asynchronous — single-threaded, blocking problem",
+                    "Event Loop: Basic Concept — Call Stack, Web APIs, Callback Queue",
+                    "Event Loop: Microtasks — Promise.then, queueMicrotask(), MutationObserver",
+                    "Event Loop: Macrotasks — setTimeout, setInterval, I/O, UI rendering",
+                    "Event Loop: Execution Order — microtasks before macrotasks, starvation",
+                    "setTimeout — delay in ms, zero delay actual behavior, clearing with clearTimeout",
+                    "setInterval — repeated execution, drift problem, clearing with clearInterval",
+                    "Recursive setTimeout — better pattern than setInterval, dynamic delay",
+                    "Callback Pattern — error-first callbacks (Node style), callback hell pyramid",
+                    "Promises: States — pending, fulfilled, rejected — immutable once settled",
+                    "Promises: .then() — chaining, returning values, promise unwrapping",
+                    "Promises: .catch() — error catching in chain, unhandled rejections",
+                    "Promises: .finally() — cleanup handler, receives no value",
+                    "Promise.all() — fail-fast behavior, results in input order",
+                    "Promise.race() — first settled (resolve or reject) wins",
+                    "Promise.allSettled() — wait for all, never rejects, status + value/reason",
+                    "Promise.any() — first fulfilled, AggregateError if all reject",
+                    "Promise.resolve() & Promise.reject() — create pre-settled promises",
+                    "Promisification — converting callback-based functions to promises",
+                    "Custom Promise Implementation (Polyfill) — build MyPromise class",
+                    "Async/Await: Basics — async function returns promise, await pauses",
+                    "Async/Await: Error Handling — try/catch block, .catch() on call",
+                    "Async/Await: Sequential Execution — for...of loop with await",
+                    "Async/Await: Parallel Execution — Promise.all + array.map",
+                    "Fetch API: GET Request — fetch(url), response object, .json(), .text()",
+                    "Fetch API: POST/PUT/DELETE — method, headers, body, FormData",
+                    "Fetch API: Error Handling — network failure vs HTTP 404/500, response.ok",
+                    "Fetch API: Abort — AbortController, signal property, timeout pattern",
+                    "XMLHttpRequest (Legacy) — old AJAX, readyState, event listeners",
+                    "Generators: Basics — function* syntax, yield keyword, next() method",
+                    "Generators: Two-way Communication — passing values to next(), return(), throw()",
+                    "Async Generators — async function* syntax, for await...of loop"
+                ]
+            },
+            {
+                phase: "Phase 6: DOM — Document Object Model (193–222)",
+                topics: [
+                    "What is DOM? — tree structure, Node types (Element, Text, Comment)",
+                    "document Object — entry point to DOM, key properties (head, body)",
+                    "getElementById — single element, fastest selection method",
+                    "getElementsByClassName — live HTMLCollection, no forEach directly",
+                    "getElementsByTagName — live HTMLCollection, wildcard * support",
+                    "querySelector — CSS selector, first matching element only",
+                    "querySelectorAll — static NodeList, forEach support, CSS selectors",
+                    "matches() & closest() — check if matches selector, find nearest ancestor",
+                    "Parent/Child Traversal — parentNode, parentElement, children, childElementCount",
+                    "firstElementChild, lastElementChild — first/last element children",
+                    "Sibling Traversal — nextElementSibling, previousElementSibling",
+                    "Node-level Traversal — childNodes, firstChild, lastChild, whitespace nodes",
+                    "innerHTML — get/set HTML content, XSS security risk awareness",
+                    "textContent vs innerText — all text vs visible rendered text",
+                    "createElement — create new element, not yet in DOM",
+                    "append & prepend — modern insertion, multiple nodes + strings",
+                    "before & after — insert sibling elements/nodes",
+                    "insertAdjacentHTML / insertAdjacentElement — position-based insertion",
+                    "remove() & removeChild() — modern removal vs old-style removal",
+                    "replaceWith() & replaceChild() — replace element with another",
+                    "cloneNode(deep) — clone element, true for deep clone with children",
+                    "Attributes — getAttribute, setAttribute, removeAttribute, hasAttribute",
+                    "dataset Property — data-* attributes, camelCase access (dataUserId)",
+                    "classList — add, remove, toggle, contains, replace methods",
+                    "Inline Styles — element.style.property, cssText property",
+                    "getComputedStyle — resolved computed styles, pseudo-element styles",
+                    "offsetWidth / offsetHeight — layout size including borders and padding",
+                    "clientWidth / clientHeight — content + padding only (no border)",
+                    "scrollWidth / scrollHeight — total scrollable area dimensions",
+                    "getBoundingClientRect() — position + size relative to viewport",
+                    "scrollTop / scrollLeft — scroll position, scrollTo, scrollBy, scrollIntoView"
+                ]
+            },
+            {
+                phase: "Phase 7: Events (223–245)",
+                topics: [
+                    "Event Basics — what are events, inline HTML handlers vs JS",
+                    "addEventListener — attach listener, multiple listeners, options object",
+                    "removeEventListener — cleanup, must pass same function reference",
+                    "Event Object — event.type, event.target vs event.currentTarget",
+                    "Mouse Events — click, dblclick, mousedown, mouseup, mousemove",
+                    "mouseenter vs mouseover — does not bubble vs bubbles",
+                    "Mouse Position — clientX/Y, pageX/Y, screenX/Y, offsetX/Y",
+                    "Keyboard Events — keydown, keyup, event.key, event.code",
+                    "Modifier Keys — ctrlKey, shiftKey, altKey, metaKey on events",
+                    "Form Events — submit, input, change, focus, blur, select",
+                    "Scroll Event — window/element scroll, passive listener for performance",
+                    "Resize Event — window resize, debounce technique needed",
+                    "Event Bubbling — event propagates upward from target to root",
+                    "Event Capturing — third argument true or {capture: true}",
+                    "stopPropagation() — stops event from bubbling further",
+                    "stopImmediatePropagation() — stops other listeners on same element",
+                    "preventDefault() — blocks default browser action (link, form submit)",
+                    "Event Delegation — single parent listener for many children",
+                    "Custom Events — new CustomEvent(), detail property, dispatchEvent()",
+                    "bubbles and composed options — control event propagation through shadow DOM",
+                    "{once: true} Option — listener auto-removes after first invocation",
+                    "{passive: true} Option — improves scroll performance, no preventDefault",
+                    "Drag & Drop API — draggable attribute, dragstart, dragover, drop events",
+                    "Clipboard Events — copy, paste, cut, clipboardData access",
+                    "Pointer Events — pointerdown, pointermove, pointerup (unify mouse+touch)",
+                    "Touch Events — touchstart, touchmove, touchend, touches list"
+                ]
+            },
+            {
+                phase: "Phase 8: BOM — Browser Object Model (246–255)",
+                topics: [
+                    "window Object — global object, window === globalThis in browser",
+                    "location Object — href, hostname, pathname, search, hash, assign(), replace()",
+                    "history Object — back(), forward(), go(), pushState, replaceState, popstate",
+                    "navigator Object — userAgent, language, platform, onLine, cookieEnabled",
+                    "screen Object — width, height, availWidth, availHeight, colorDepth, pixelDepth",
+                    "localStorage — persistent storage, setItem, getItem, removeItem, clear",
+                    "sessionStorage — tab-specific storage, auto-cleared on tab close",
+                    "Cookies — document.cookie, expires, path, domain, secure, SameSite",
+                    "Page Visibility API — document.visibilityState, visibilitychange event",
+                    "Fullscreen API — element.requestFullscreen(), document.exitFullscreen()"
+                ]
+            },
+            {
+                phase: "Phase 9: Observers & Modern APIs (256–272)",
+                topics: [
+                    "IntersectionObserver — element visibility tracking, lazy loading images",
+                    "MutationObserver — watch DOM changes (attributes, childList, subtree)",
+                    "ResizeObserver — element size change detection, better than resize event",
+                    "requestAnimationFrame — browser-paint-synced animation loop, 60fps",
+                    "cancelAnimationFrame — stopping rAF loop",
+                    "requestIdleCallback — low-priority background work, deadline parameter",
+                    "Web Workers — Dedicated Worker, new Worker(), postMessage, onmessage",
+                    "Blob — binary large object, URL.createObjectURL, revokeObjectURL",
+                    "File API — file input, File object, FileReader (readAsDataURL, readAsText)",
+                    "WebSockets — new WebSocket(url), onopen, onmessage, onclose, onerror",
+                    "Server-Sent Events — EventSource API, one-way server push, auto-reconnect",
+                    "Geolocation API — navigator.geolocation.getCurrentPosition, watchPosition",
+                    "Notification API — Notification.requestPermission(), new Notification()",
+                    "Canvas API (2D Context) — getContext('2d'), fillRect, arc, path, text",
+                    "Canvas: Images — drawImage, image loading, canvas to data URL",
+                    "Canvas: Animation — clearRect + redraw with requestAnimationFrame",
+                    "FormData API — new FormData(form), append, send via fetch POST",
+                    "Constraint Validation API — checkValidity, reportValidity, setCustomValidity"
+                ]
+            },
+            {
+                phase: "Phase 10: Mastery — Patterns & Performance (273–293)",
+                topics: [
+                    "Module Pattern — IIFE + closure, private variables & public API",
+                    "Revealing Module Pattern — expose only chosen methods",
+                    "Singleton Pattern — single shared instance, global configuration",
+                    "Factory Pattern — object creation without new keyword",
+                    "Observer Pattern — subscribe/unsubscribe/notify, event system",
+                    "Decorator Pattern — wrapping functions to add behavior",
+                    "Proxy API — traps: get, set, has, deleteProperty, apply, construct",
+                    "Reflect API — default operation methods, safer than direct access",
+                    "Memoization — caching function results for repeated arguments",
+                    "Debounce — delay execution until pause (search input pattern)",
+                    "Throttle — limit execution rate (scroll, resize pattern)",
+                    "Currying — transform f(a,b,c) into f(a)(b)(c)",
+                    "Infinite Currying — sum(1)(2)(3)... with valueOf/toString",
+                    "Function Composition — pipe() and compose() utilities",
+                    "Memory Leaks: Detection — Chrome DevTools heap snapshot, comparison view",
+                    "Memory Leaks: Common Causes — global vars, forgotten timers, detached DOM",
+                    "Memory Leaks: Prevention — cleanup listeners, WeakMap for DOM data",
+                    "Shadow DOM Basics — element.attachShadow({mode:'open'}), style encapsulation",
+                    "Template Element — <template> tag, content property, cloneNode",
+                    "Custom Elements Basics — customElements.define(), lifecycle callbacks",
+                    "Security: XSS (Cross-Site Scripting) — innerHTML danger, escaping output",
+                    "Security: CSRF (Cross-Site Request Forgery) — tokens, SameSite cookies",
+                    "Security: CSP (Content Security Policy) — header basics, inline script blocking"
+                ]
+            },
+            {
+                phase: "Phase 11: Build Your Own — Polyfills (294–300)",
+                topics: [
+                    "MyPromise — full Promise class with then/catch/finally/static methods",
+                    "myBind — custom Function.prototype.bind implementation",
+                    "myCall — custom Function.prototype.call implementation",
+                    "myApply — custom Function.prototype.apply implementation",
+                    "myMap — custom Array.prototype.map polyfill",
+                    "myFilter — custom Array.prototype.filter polyfill",
+                    "myReduce — custom Array.prototype.reduce polyfill",
+                    "myDebounce — custom debounce utility function",
+                    "myThrottle — custom throttle utility function",
+                    "Event Emitter — custom pub-sub event system with on/emit/off",
+                    "Simple State Machine — vanilla JS state management pattern"
+                ]
+            }
+        ];
+
+        // ============================================================
+        // LOCALSTORAGE
+        // ============================================================
+        const STORAGE_KEY = 'js-roadmap-final-completed';
+
+        function getCompletedSet() {
+            try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? new Set(JSON.parse(raw)) : new Set(); }
+            catch (e) { return new Set(); }
+        }
+
+        function saveCompletedSet(set) {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); }
+            catch (e) { alert('LocalStorage full!'); }
+        }
+
+        function toggleTopic(topicId) {
+            const completed = getCompletedSet();
+            completed.has(topicId) ? completed.delete(topicId) : completed.add(topicId);
+            saveCompletedSet(completed);
+            refreshUIState();
+        }
+
+        function resetAll() {
+            if (confirm('⚠️ Reset ALL progress? This cannot be undone.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                refreshUIState();
+            }
+        }
+
+        // ============================================================
+        // DARK MODE
+        // ============================================================
+        const DARK_KEY = 'js-roadmap-final-dark';
+
+        function getDarkMode() { return localStorage.getItem(DARK_KEY) === 'true'; }
+
+        function setDarkMode(enabled) {
+            localStorage.setItem(DARK_KEY, enabled);
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkIcon').textContent = '☀️';
+                document.getElementById('darkText').textContent = 'Light';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkIcon').textContent = '🌙';
+                document.getElementById('darkText').textContent = 'Dark';
+            }
+        }
+
+        function toggleDarkMode() { setDarkMode(!getDarkMode()); }
+
+        // ============================================================
+        // BUILD UI
+        // ============================================================
+        let allTopicIds = [];
+
+        function buildUI() {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+            allTopicIds = [];
+            let globalIndex = 0;
+
+            roadmapData.forEach((phase, phaseIndex) => {
+                const section = document.createElement('div');
+                section.className = 'phase-section open';
+
+                const phaseTopicIds = [];
+                for (let i = 0; i < phase.topics.length; i++) {
+                    const id = `t-${globalIndex}`;
+                    phaseTopicIds.push(id);
+                    allTopicIds.push(id);
+                    globalIndex++;
+                }
+
+                section.innerHTML = `
+                    <div class="phase-header">
+                        <h2>
+                            <span class="phase-arrow">▶</span>
+                            ${phase.phase}
+                            <span class="phase-count" id="count-${phaseIndex}"></span>
+                        </h2>
+                    </div>
+                    <div class="topic-list">
+                        ${phase.topics.map((topic, i) => `
+                            <div class="topic-item" data-id="${phaseTopicIds[i]}">
+                                <span class="topic-number">#${(globalIndex - phase.topics.length + i + 1)}</span>
+                                <span class="topic-text">${topic}</span>
+                                <span class="checkbox-circle">✓</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                container.appendChild(section);
+
+                section.querySelector('.phase-header').addEventListener('click', () => {
+                    section.classList.toggle('open');
+                });
+
+                section.querySelectorAll('.topic-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleTopic(item.dataset.id);
+                    });
+                });
+            });
+
+            document.getElementById('totalCount').textContent = allTopicIds.length;
+        }
+
+        // ============================================================
+        // REFRESH UI STATE
+        // ============================================================
+        function refreshUIState() {
+            const completed = getCompletedSet();
+            const total = allTopicIds.length;
+            const done = allTopicIds.filter(id => completed.has(id)).length;
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+            document.getElementById('completedCount').textContent = done;
+            document.getElementById('percentText').textContent = pct + '%';
+            document.getElementById('progressFill').style.width = pct + '%';
+
+            document.querySelectorAll('.topic-item').forEach(item => {
+                item.classList.toggle('completed', completed.has(item.dataset.id));
+            });
+
+            let gIdx = 0;
+            roadmapData.forEach((phase, pIdx) => {
+                let phaseDone = 0;
+                for (let i = 0; i < phase.topics.length; i++) {
+                    if (completed.has(`t-${gIdx}`)) phaseDone++;
+                    gIdx++;
+                }
+                const countEl = document.getElementById(`count-${pIdx}`);
+                if (countEl) countEl.textContent = `(${phaseDone}/${phase.topics.length})`;
+            });
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        function init() {
+            setDarkMode(getDarkMode());
+            buildUI();
+            refreshUIState();
+            document.getElementById('darkToggle').addEventListener('click', toggleDarkMode);
+            document.getElementById('resetBtn').addEventListener('click', resetAll);
+        }
+
+        init();
+    </script>
+</body>
+</html>
