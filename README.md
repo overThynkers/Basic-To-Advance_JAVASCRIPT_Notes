@@ -14,7 +14,7 @@ The content is carefully curated to provide quick revision material while ensuri
 
 ---
 
-# 🗺️ 0_Road-Map-of-JS.html
+# 🗺️ 00_Road-Map-of-JS.html
 
 This file contains an almost complete roadmap for mastering **Vanilla JavaScript**, carefully organized to guide learners through every stage of their JavaScript journey.
 
