@@ -1,40 +1,55 @@
-//! INTRODUCTION TO JAVASCRIPT (INTERVIEW QUESTIONS WITH ANSWERS)
+//! Variables & Values
 
-//* What is JavaScript?
-//? JavaScript is a programming language used to make websites interactive and dynamic.
+//* What is Variables?
+//? A variable is a container (box) used to store data values in memory.
+//? It allows us to store, update, and reuse data in a program.
+//todo Example - var myName = "World"; 
+//todo var = keyword, myName = variable name, "World" = value;
 
-//* Who created JavaScript and in which year?
-//? Brendan Eich created JavaScript in 1995 at Netscape.
+//* Types Of Variables 
 
-//* What was the original name of JavaScript?
-//? It was first called Mocha, then LiveScript, and finally JavaScript.
+//? var
+//? var is the oldest way to declare a variable in JavaScript.
+//? It has function scope and can be re-declared and updated.
+//? It is less preferred in modern JavaScript because it can cause scope issues.
 
-//* Why was JavaScript renamed from LiveScript to JavaScript?
-//? It was renamed to gain popularity by associating it with Java.
+//? let
+//? let is a modern way to declare variables introduced in ES6.
+//? It has block scope and can be updated but cannot be re-declared in the same scope.
+//? It is commonly used when the value of a variable may change.
 
-//* What is ECMAScript?
-//? ECMAScript is the standard specification on which JavaScript is based.
+//? const
+//? const is also introduced in ES6.
+//? It has block scope and cannot be re-declared or updated.
+//? It is used for constant values that should not change.
 
-//* When was ES6 introduced and why is it important?
-//? ES6 was introduced in 2015 and it added modern features like let/const, arrow functions, classes, etc.
 
-//* What are the different ways to write JavaScript?
-//? Inline, Internal, and External JavaScript.
+//* What is Value?
+//? A value is the actual data stored inside a variable.
+//? It can be different types like string, number, boolean, etc.
+//? Values are what we assign to variables and work with in a program.
+//todo Example - "World", 25, true, false, 3.14
 
-//* What is inline JavaScript?
-//? JavaScript written directly inside HTML elements using attributes like onclick.
+//* Naming Variables: Rules and best practices 
+//? Variables names must start with a letter, an underscore(_) or a dollar sign ($)
+//? Variable names cannot contain spaces.
+//? By convenion, JavaScript variable names are written in camelCase.
+//? Variables cannot be the same as reserved keywords such as if or const.
+//? Variables names are case sensitive.
+//? Variable names can be as long as you need.
 
-//* What is internal JavaScript?
-//? JavaScript written inside <script> tags in the same HTML file.
+var myAge = 18;
+console.log(myAge);
 
-//* What is external JavaScript?
-//? JavaScript written in a separate .js file and linked using <script src="file.js"></script>.
+//! Quize 
+//* Valid✔ or Invalid❌
 
-//* Difference between inline, internal and external JavaScript?
-//? Inline is written in HTML elements, internal is inside HTML file, and external is in a separate file.
+//? var my_firstName = "John"; Valid ✅
+//? var _myLastName$ = "Doe"; Valid ✅
+//? var 123myAge = 25; Invalid ❌
+//? var $cityName = "New York"; Valid ✅
+//? var my@Email = "info@overThynkers.com" Invalid ❌
 
-//* Why is external JavaScript preferred over inline and internal?
-//? Because it improves code readability, reusability, and maintainability.
 
 
 
