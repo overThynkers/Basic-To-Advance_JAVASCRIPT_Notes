@@ -272,3 +272,328 @@
 
 //* Q20: Can type coercion lead to bugs?
 //? Answer: Yes, because it may produce unexpected results if not understood properly.
+
+
+//! INTERVIEW QUESTIONS
+
+//* What is an Operand?
+//? An operand is a value or variable on which an operator performs an operation.
+//? Example: In 5 + 3, both 5 and 3 are operands.
+
+//* What is an Operator?
+//? An operator is a symbol that performs an operation on one or more operands.
+//? Example: +, -, *, /, %, ==, &&
+
+//* What is an Expression?
+//? An expression is a combination of operands and operators that produces a value.
+//? Example: 5 + 3
+
+//* What are the different types of Operators in JavaScript?
+//? Assignment, Arithmetic, Comparison, Logical, String, Unary, Ternary, and Type Operators.
+
+//* What is an Assignment Operator?
+//? Assignment operators assign values to variables.
+//? Example: let a = 10;
+
+//* What is the difference between = and == ?
+//? = is used to assign a value.
+//? == is used to compare two values with type coercion.
+
+//* What is the difference between == and === ?
+//? == compares only values and performs type coercion.
+//? === compares both values and data types without type coercion.
+
+//* What is an Arithmetic Operator?
+//? Arithmetic operators perform mathematical calculations.
+//? Examples: +, -, *, /, %
+
+//* What does the Modulus (%) operator do?
+//? It returns the remainder after division.
+//? Example: 17 % 5 returns 2.
+
+//* What is the output of 10 % 3 ?
+//? Output: 1
+
+//* What is the purpose of toFixed() method?
+//? It limits the number of decimal places.
+//? Example: (0.3).toFixed(2) returns "0.30".
+
+//* What is a String Operator?
+//? The + operator is used to concatenate strings.
+//? Example: "Hello" + " World"
+
+//* What is String Concatenation?
+//? Joining two or more strings together.
+
+//* What are Comparison Operators?
+//? Operators used to compare values and return true or false.
+//? Examples: ==, ===, !=, !==, >, <, >=, <=
+
+//* What is the difference between != and !== ?
+//? != compares values only.
+//? !== compares both values and data types.
+
+//* What is the output of 5 == "5" ?
+//? Output: true
+
+//* What is the output of 5 === "5" ?
+//? Output: false
+
+//* What are Logical Operators?
+//? Operators used to combine or invert conditions.
+//? Examples: &&, ||, !
+
+//* What does Logical AND (&&) do?
+//? Returns true only if all conditions are true.
+
+//* What does Logical OR (||) do?
+//? Returns true if at least one condition is true.
+
+//* What does Logical NOT (!) do?
+//? Reverses the boolean value.
+
+//* What is the output of true && false ?
+//? Output: false
+
+//* What is the output of true || false ?
+//? Output: true
+
+//* What is a Ternary Operator?
+//? A shorthand version of if...else.
+//? Syntax: condition ? trueValue : falseValue
+
+//* Write the syntax of a Ternary Operator.
+//? condition ? expression1 : expression2
+
+//* When should you use a Ternary Operator?
+//? For simple conditional checks where only two outcomes are possible.
+
+//* What is a Control Statement?
+//? A statement that controls the flow of program execution.
+//? Examples: if-else, switch, loops
+
+//* What is an If Statement?
+//? Executes a block of code only if a condition is true.
+
+//* What is an If-Else Statement?
+//? Executes one block if the condition is true and another if it is false.
+
+//* What is Nested If-Else?
+//? An if-else statement inside another if-else statement.
+
+//* What is an Else If Ladder?
+//? Multiple conditions checked one after another.
+
+//* What is a Switch Statement?
+//? A control statement used to execute different code blocks based on different values.
+
+//* What is the purpose of break in a Switch Statement?
+//? It stops execution and exits the switch block.
+
+//* What happens if break is omitted in a Switch Statement?
+//? Execution continues into the next case (fall-through).
+
+//* What is the purpose of the default case in a Switch Statement?
+//? It runs when no case matches the expression.
+
+//* What is a Loop?
+//? A loop repeatedly executes a block of code until a condition becomes false.
+
+//* What is a While Loop?
+//? Executes code repeatedly while a condition remains true.
+
+//* What is the syntax of a While Loop?
+//? while(condition) {
+//?   code
+//? }
+
+//* What is an Infinite Loop?
+//? A loop that never ends because its condition always remains true.
+
+//* What is a Do-While Loop?
+//? Similar to a while loop, but executes at least once before checking the condition.
+
+//* What is the difference between While and Do-While Loop?
+//? While checks the condition first.
+//? Do-While executes once before checking the condition.
+
+//* What is a For Loop?
+//? A loop used when the number of iterations is known.
+
+//* What is the syntax of a For Loop?
+//? for(initialization; condition; increment/decrement) {
+//?   code
+//? }
+
+//* What are the three parts of a For Loop?
+//? Initialization, Condition, and Update (Increment/Decrement).
+
+//* When should you use a For Loop?
+//? When the number of iterations is known beforehand.
+
+//* How do you print numbers from 1 to 10 using a For Loop?
+//? for(let i = 1; i <= 10; i++) {
+//?   console.log(i);
+//? }
+
+//* How do you print even numbers from 1 to 100?
+//? Use a loop and check if the number is divisible by 2.
+
+//* How do you print odd numbers from 1 to 100?
+//? Use a loop and check if the number is not divisible by 2.
+
+//* How do you find the sum of numbers from 1 to 10?
+//? Use a loop and keep adding values to a variable.
+
+//* What is a Leap Year?
+//? A year divisible by 4 but not by 100, unless it is also divisible by 400.
+
+//* How do you check if a number is Even or Odd?
+//? Use the modulus operator.
+//? num % 2 === 0 means Even, otherwise Odd.
+
+//* How do you check if a number is Positive, Negative, or Zero?
+//? Use if-else conditions.
+
+//* What is Operator Precedence?
+//? The order in which operators are evaluated in an expression.
+
+//* Which operator has higher precedence, && or || ?
+//? && has higher precedence than ||.
+
+//* What is Type Coercion in JavaScript?
+//? Automatic conversion of one data type into another by JavaScript.
+
+//* Give an example of Type Coercion.
+//? "5" == 5 returns true because JavaScript converts the string to a number.
+
+//* What is Short-Circuit Evaluation?
+//? JavaScript stops evaluating an expression as soon as the result is determined.
+
+//* What is the output of:
+//? console.log(5 > 2 && 10 < 20);
+//? Output: true
+
+//* What is the output of:
+//? console.log(!(5 > 2));
+//? Output: false
+
+//* What is the output of:
+//? console.log(10 + "5");
+//? Output: "105"
+
+//* What is the output of:
+//? console.log("10" - 5);
+//? Output: 5
+
+//* What is the output of:
+//? console.log(typeof (5 + "5"));
+//? Output: string
+
+//* What is the output of:
+//? console.log(typeof (5 - "5"));
+//? Output: number
+
+
+// ==========================================================
+// Interview Questions - JavaScript Functions
+// ==========================================================
+
+// * What is a function in JavaScript?
+// ? A function is a reusable block of code designed to perform a specific task. Functions help organize code, improve readability, and reduce repetition.
+
+// * What is the difference between a function declaration and a function expression?
+// ? A function declaration is created using the function keyword and is hoisted. A function expression is assigned to a variable and is not fully hoisted.
+
+// * What is function invocation?
+// ? Function invocation means calling or executing a function using its name followed by parentheses.
+
+// * What is the difference between parameters and arguments?
+// ? Parameters are variables listed in the function definition, while arguments are the actual values passed to the function when it is called.
+
+// * What is the return keyword in JavaScript?
+// ? The return keyword ends function execution and sends a value back to the caller.
+
+// * What happens if a function does not return anything?
+// ? JavaScript automatically returns undefined if no return statement is provided.
+
+// * What is a function expression?
+// ? A function expression is a function assigned to a variable. It can be named or anonymous.
+
+// * What is an anonymous function?
+// ? An anonymous function is a function without a name. It is commonly used in function expressions and callbacks.
+
+// * What is a named function expression?
+// ? A named function expression is a function expression that has its own name inside the function definition.
+
+// * What is IIFE in JavaScript?
+// ? IIFE stands for Immediately Invoked Function Expression. It executes immediately after being defined.
+
+// * Why do we use IIFE?
+// ? IIFE is used to create a private scope, avoid polluting the global scope, and execute code immediately.
+
+// * What is function hoisting?
+// ? Function hoisting is JavaScript's behavior of moving function declarations to the top of their scope before execution.
+
+// * Are function expressions hoisted?
+// ? No. Function expressions are not fully hoisted like function declarations.
+
+// * What is the difference between a regular function and an arrow function?
+// ? Arrow functions have shorter syntax and do not have their own this value, while regular functions do.
+
+// * What is a callback function?
+// ? A callback function is a function passed as an argument to another function and executed later.
+
+// * What is a higher-order function?
+// ? A higher-order function is a function that accepts another function as an argument or returns a function.
+
+// * What are first-class functions in JavaScript?
+// ? JavaScript treats functions as first-class citizens, meaning functions can be assigned to variables, passed as arguments, and returned from other functions.
+
+// * Can a function be stored inside a variable?
+// ? Yes. Since functions are first-class citizens, they can be assigned to variables.
+
+// * Can a function return another function?
+// ? Yes. JavaScript allows functions to return other functions.
+
+// * What is recursion?
+// ? Recursion is a technique where a function calls itself until a specified condition is met.
+
+// * What is the difference between local scope and global scope?
+// ? Variables declared inside a function have local scope, while variables declared outside functions have global scope.
+
+// * What is a pure function?
+// ? A pure function always produces the same output for the same input and does not modify external state.
+
+// * What are side effects in functions?
+// ? Side effects occur when a function modifies data outside its own scope, such as changing global variables or manipulating the DOM.
+
+// * What is the difference between == and ===?
+// ? == compares values after type conversion, while === compares both value and data type without conversion.
+
+// * Can functions be passed as arguments to other functions?
+// ? Yes. Functions can be passed as arguments because JavaScript treats functions as first-class citizens.
+
+// * What is a self-invoking function?
+// ? A self-invoking function is another name for an IIFE, a function that executes immediately after being created.
+
+// * What is the purpose of callback functions in asynchronous programming?
+// ? Callback functions allow code to execute after an asynchronous task has completed.
+
+// * What is the difference between function parameters and default parameters?
+// ? Default parameters provide fallback values when arguments are not supplied during function invocation.
+
+// * What is a rest parameter in a function?
+// ? A rest parameter collects multiple arguments into a single array using the (...) syntax.
+
+// * Can a JavaScript function have multiple return statements?
+// ? Yes. A function can contain multiple return statements, but only one will execute during a single function call.
+
+// * What is the difference between return and console.log()?
+// ? return sends a value back to the caller, while console.log() only displays information in the console.
+
+// * What is a nested function?
+// ? A nested function is a function defined inside another function.
+
+// * What is a closure?
+// ? A closure is created when an inner function remembers and accesses variables from its outer function even after the outer function has finished executing.
