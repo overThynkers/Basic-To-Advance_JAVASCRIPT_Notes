@@ -597,3 +597,377 @@
 
 // * What is a closure?
 // ? A closure is created when an inner function remembers and accesses variables from its outer function even after the outer function has finished executing.
+
+
+
+// ==========================================================
+//! Interview Questions - ECMAScript 2015 (ES6)
+// ==========================================================
+
+// * What is ECMAScript 2015 (ES6)?
+// ? ECMAScript 2015, commonly known as ES6, is a major update to JavaScript that introduced new features and syntax improvements to make code more readable, maintainable, and efficient.
+
+// * Why was ES6 introduced?
+// ? ES6 was introduced to solve common JavaScript problems, improve developer productivity, and provide modern programming features similar to other programming languages.
+
+// ==========================================================
+// let Keyword
+// ==========================================================
+
+// * What is the let keyword in JavaScript?
+// ? The let keyword is used to declare variables with block scope. Variables declared with let can be reassigned but cannot be redeclared within the same scope.
+
+// * What is block scope?
+// ? Block scope means a variable is only accessible within the block ({}) where it was declared.
+
+// * What is the difference between var and let?
+// ? var has function scope and can be redeclared, while let has block scope and cannot be redeclared in the same scope.
+
+// * Can a let variable be reassigned?
+// ? Yes, variables declared with let can be reassigned.
+
+// * Can a let variable be redeclared?
+// ? No, let variables cannot be redeclared within the same scope.
+
+// ==========================================================
+// const Keyword
+// ==========================================================
+
+// * What is the const keyword?
+// ? The const keyword is used to declare variables whose references cannot be reassigned after initialization.
+
+// * Can a const variable be reassigned?
+// ? No, a const variable cannot be reassigned after it has been initialized.
+
+// * Are const variables immutable?
+// ? Not completely. Primitive values cannot be changed, but objects and arrays declared with const can have their contents modified.
+
+// * What is the difference between let and const?
+// ? let allows reassignment, while const does not allow reassignment after initialization.
+
+// * When should you use const?
+// ? Use const by default and use let only when you know the value needs to change.
+
+// ==========================================================
+// Template Literals
+// ==========================================================
+
+// * What are template literals?
+// ? Template literals are strings enclosed in backticks (`) that allow string interpolation and multi-line strings.
+
+// * What is string interpolation?
+// ? String interpolation is the process of embedding variables or expressions inside a string using ${}.
+
+// * What are the advantages of template literals?
+// ? They improve readability, support multi-line strings, and make variable insertion easier.
+
+// * What is the difference between template literals and normal strings?
+// ? Template literals use backticks and support interpolation, while normal strings use single or double quotes and require concatenation.
+
+// ==========================================================
+// Default Parameters
+// ==========================================================
+
+// * What are default parameters?
+// ? Default parameters allow functions to use predefined values when no arguments are passed.
+
+// * Why are default parameters useful?
+// ? They help prevent undefined values and reduce the need for manual parameter checking.
+
+// * Can default parameters use expressions?
+// ? Yes, default parameter values can be expressions or function calls.
+
+// ==========================================================
+// Arrow Functions
+// ==========================================================
+
+// * What are arrow functions?
+// ? Arrow functions are a shorter syntax for writing functions introduced in ES6.
+
+// * What is the syntax of an arrow function?
+// ? Arrow functions use the => operator.
+
+// * What is the main difference between regular functions and arrow functions?
+// ? Arrow functions do not have their own this value.
+
+// * Can arrow functions be used as constructors?
+// ? No, arrow functions cannot be used with the new keyword.
+
+// * When should arrow functions be used?
+// ? Arrow functions are commonly used for callbacks and short utility functions.
+
+// * Do arrow functions have their own arguments object?
+// ? No, arrow functions do not have their own arguments object.
+
+// ==========================================================
+// Destructuring
+// ==========================================================
+
+// * What is destructuring in JavaScript?
+// ? Destructuring is a feature that allows extracting values from arrays or properties from objects into variables.
+
+// * What is array destructuring?
+// ? Array destructuring extracts values from arrays into separate variables.
+
+// * What is object destructuring?
+// ? Object destructuring extracts object properties into variables using matching property names.
+
+// * Why is destructuring useful?
+// ? It reduces repetitive code and improves readability.
+
+// * Can we rename variables during object destructuring?
+// ? Yes, object properties can be assigned to variables with different names.
+
+// ==========================================================
+// Enhanced Object Properties
+// ==========================================================
+
+// * What are enhanced object properties?
+// ? Enhanced object properties provide a shorter syntax for defining object properties and methods.
+
+// * What is object property shorthand?
+// ? When variable names and property names are the same, ES6 allows using only the variable name.
+
+// * Why are enhanced object properties useful?
+// ? They make object creation cleaner and reduce repetition.
+
+// ==========================================================
+// Rest Operator
+// ==========================================================
+
+// * What is the rest operator?
+// ? The rest operator (...) collects multiple values into a single array.
+
+// * Where is the rest operator commonly used?
+// ? It is commonly used in function parameters.
+
+// * Can a function have multiple rest parameters?
+// ? No, a function can only have one rest parameter.
+
+// * Why is the rest operator useful?
+// ? It allows functions to accept an unlimited number of arguments.
+
+// ==========================================================
+// Spread Operator
+// ==========================================================
+
+// * What is the spread operator?
+// ? The spread operator (...) expands arrays, objects, or iterable elements into individual values.
+
+// * What is the difference between spread and rest operators?
+// ? The spread operator expands values, while the rest operator collects values.
+
+// * How is the spread operator used with arrays?
+// ? It can copy, merge, or pass array elements individually.
+
+// * How is the spread operator used with objects?
+// ? It can copy or merge object properties into a new object.
+
+// * Why is the spread operator useful?
+// ? It provides an easy way to clone and merge arrays or objects without modifying the original data.
+
+// ==========================================================
+// General ES6 Questions
+// ==========================================================
+
+// * What are the most important features introduced in ES6?
+// ? let, const, template literals, arrow functions, destructuring, default parameters, rest operator, spread operator, classes, modules, promises, Map, and Set.
+
+// * Why is ES6 considered important in modern JavaScript?
+// ? ES6 introduced modern syntax and features that make JavaScript more powerful, maintainable, and developer-friendly.
+
+// * What are the benefits of using ES6?
+// ? Improved readability, cleaner syntax, better code organization, reduced boilerplate code, and enhanced functionality.
+
+// * Is ES6 supported in modern browsers?
+// ? Yes, most ES6 features are fully supported in modern browsers.
+
+// * What is transpiling in JavaScript?
+// ? Transpiling is the process of converting modern JavaScript (ES6+) into older JavaScript versions using tools like Babel so that older browsers can understand the code.
+
+
+
+// ! INTERVIEW QUESTION
+// * Question: How do you remove duplicate values from an array? And if we don't want to mutate the original array, what should we do?
+// ? Answer english me likhna hai
+
+// ==========================================================
+// * Removing Duplicates from an Array
+// ==========================================================
+
+// ? Removing duplicate values from an array is a very common task
+// ? in JavaScript development, especially when dealing with user
+// ? data, API responses, or any collection that might contain
+// ? repeated entries.
+
+// ? There are multiple ways to achieve this, depending on whether
+// ? you want to mutate the original array or create a new one.
+
+// ==========================================================
+// * Key Concepts to Mention in the Answer
+// ==========================================================
+
+// ? 1. Using Set (ES6) - The most modern and concise way
+// ? 2. Using filter and indexOf - Classic approach
+// ? 3. Using reduce - Functional approach
+// ? 4. Using forEach and includes - Manual approach
+// ? 5. Performance considerations for large arrays
+
+// ==========================================================
+// * Method 1: Using Set (Recommended)
+// ==========================================================
+
+// ? Set is a built-in object that only stores unique values.
+// ? This is the cleanest and most performant way to remove duplicates.
+
+// Example:
+
+const numbers = [1, 2, 2, 3, 4, 4, 5, 5, 5];
+
+// Creating a new array without mutating the original
+const uniqueNumbers = [...new Set(numbers)];
+console.log(uniqueNumbers); // [1, 2, 3, 4, 5]
+console.log(numbers); // [1, 2, 2, 3, 4, 4, 5, 5, 5] (Original unchanged)
+
+// ? Also works with strings
+const fruits = ["apple", "banana", "apple", "mango", "banana"];
+const uniqueFruits = [...new Set(fruits)];
+console.log(uniqueFruits); // ["apple", "banana", "mango"]
+
+// ==========================================================
+// * Method 2: Using filter() and indexOf()
+// ==========================================================
+
+// ? This method filters elements by keeping only the first
+// ? occurrence of each value. indexOf returns the first index
+// ? of a given element.
+
+// Example:
+
+const colors = ["red", "blue", "red", "green", "blue", "yellow"];
+
+const uniqueColors = colors.filter((color, index, array) => {
+return array.indexOf(color) === index;
+});
+
+console.log(uniqueColors); // ["red", "blue", "green", "yellow"]
+
+// ? How it works: For each element, we check if its first
+// ? occurrence index matches the current index. If yes, keep it;
+// ? if no (meaning it appeared earlier), skip it.
+
+// ==========================================================
+// * Method 3: Using reduce()
+// ==========================================================
+
+// ? The reduce method builds a new array by checking if the
+// ? current element already exists in the accumulator.
+
+// Example:
+
+const items = [10, 20, 10, 30, 20, 40];
+
+const uniqueItems = items.reduce((accumulator, currentValue) => {
+if (!accumulator.includes(currentValue)) {
+accumulator.push(currentValue);
+}
+return accumulator;
+}, []);
+
+console.log(uniqueItems); // [10, 20, 30, 40]
+
+// ==========================================================
+// * Method 4: Using forEach() and includes()
+// ==========================================================
+
+// ? A manual approach that gives you full control over the logic.
+
+// Example:
+
+const letters = ["a", "b", "a", "c", "b", "d"];
+
+const uniqueLetters = [];
+letters.forEach((letter) => {
+if (!uniqueLetters.includes(letter)) {
+uniqueLetters.push(letter);
+}
+});
+
+console.log(uniqueLetters); // ["a", "b", "c", "d"]
+
+// ==========================================================
+// * Handling Array of Objects (Removing Duplicates by Property)
+// ==========================================================
+
+// ? When working with objects, duplicates are usually identified
+// ? by a specific property (like id). Set alone won't work here
+// ? because objects are compared by reference, not value.
+
+// Example:
+
+const users = [
+{ id: 1, name: "Ali" },
+{ id: 2, name: "Ahmed" },
+{ id: 1, name: "Ali" }, // Duplicate based on id
+{ id: 3, name: "Sara" }
+];
+
+// Method 1: Using filter and Map/Set for tracking
+const seenIds = new Set();
+const uniqueUsers = users.filter(user => {
+if (seenIds.has(user.id)) {
+return false;
+}
+seenIds.add(user.id);
+return true;
+});
+
+console.log(uniqueUsers);
+// [{ id: 1, name: "Ali" }, { id: 2, name: "Ahmed" }, { id: 3, name: "Sara" }]
+
+// Method 2: Using reduce with an object as accumulator
+const uniqueUsers2 = Object.values(
+users.reduce((acc, user) => {
+acc[user.id] = user;
+return acc;
+}, {})
+);
+
+console.log(uniqueUsers2);
+
+// ==========================================================
+// * Performance Comparison (Good to Mention)
+// ==========================================================
+
+// ? For primitive values (strings, numbers):
+// ? - Set approach: O(n) - Fastest for large arrays
+// ? - filter + indexOf: O(n²) - Slower for large arrays because
+// ? indexOf iterates internally for each element
+
+// ? For arrays of objects:
+// ? - Map/Set tracking: O(n) - Recommended
+// ? - reduce with object: O(n) - Also efficient
+
+// ==========================================================
+// * One-Liner Duplicate Removal (Quick Answer)
+// ==========================================================
+
+// ? If the interviewer asks for the shortest way:
+
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const unique = [...new Set(arr)];
+
+console.log(unique); // [1, 2, 3, 4, 5]
+
+// ==========================================================
+// * Interview Tip
+// ==========================================================
+
+// ? When answering this question, always mention:
+// ? 1. Whether the original array is mutated or not (immutability is
+// ? preferred in modern JavaScript, especially in React).
+// ? 2. The Set method as the modern ES6+ approach.
+// ? 3. How you'd handle objects (since Set compares by reference).
+// ? 4. Performance considerations for large datasets.
+// ? 5. That you understand multiple approaches and can choose based
+// ? on the specific use case.
