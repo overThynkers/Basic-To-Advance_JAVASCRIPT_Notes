@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo Application</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            padding: 3rem 0 0;
+            background-color: #111;
+            color: #fafafa;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            margin: 0 0 30px;
+            text-transform: uppercase;
+            font-size: 30px;
+        }
+        #todo-input {
+            font-size: 20px;
+            width: 600px;
+            padding: 10px 10px;
+        }
+        #addTodoBtn  {
+            padding: 10px 20px;
+            font-size: 20px;
+            text-transform: uppercase;
+            background-color: #0ada;
+            border: 2px solid transparent;
+            transition: all 300ms ease;
+            cursor: pointer;
+
+        }
+        #addTodoBtn:hover {
+            border-color: #0ada;
+            color: #fff;
+            background: none;
+        }
+        .todos-container {
+            margin: 70px 0 0;
+            width: 100%;
+            padding: 0 0 0 20px;
+        }
+        ul {
+            list-style: none;
+        }
+        .todo-item {
+            font-size: 20px;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            padding: 15px 15px;
+            justify-content: space-between;
+            margin: 0 0 10px;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+        .todo-item:hover p,
+        .todo-item.active p {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+        .delete-todo {
+            padding: 10px 20px;
+            font: 16px;
+            text-transform: uppercase;
+            font-weight: 800;
+            background-color: #0ada;
+            border: 2px solid transparent;
+            transition: all 300ms ease;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .delete-todo:hover {
+            border-color: #0ada;
+            color: #fff;
+            background: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="header">Simple Todo List</h2>
+        <div class="input-container">
+            <input type="text" placeholder="Enter your todo..." id="todo-input">
+            <button id="addTodoBtn">Add todo</button>
+        </div>
+        <ul class="todos-container">
+        </ul>
+    </div>
+    <script>
+        const deleteTodo = () => {
+            const todosItems = document.querySelectorAll(".todo-item");
+            const deleteBtnElements = document.querySelectorAll(".delete-todo");
+            todosItems.forEach(curEl => {
+                curEl.addEventListener("click", (e) => {
+                    curEl.classList.toggle("active");
+                    if(e.target.classList.contains("delete-todo")) {
+                        e.target.parentElement.remove();
+                    }
+                });
+            });
+        };
+
+        const addTodo = (userInput) => {
+            const todosContainerEl = document.querySelector(".todos-container");
+            if(!todosContainerEl) return;
+            let liEl = document.createElement("li");
+            liEl.className = "todo-item";
+            let paragraphEl = document.createElement("p");
+            paragraphEl.textContent = userInput;
+            liEl.appendChild(paragraphEl);
+            let deleteBtnEl = document.createElement("button");
+            deleteBtnEl.className = "delete-todo";
+            deleteBtnEl.textContent = "Delete";
+            liEl.appendChild(deleteBtnEl)
+            todosContainerEl.appendChild(liEl);
+            deleteTodo();
+        };
+
+        const todoManager = () => {
+            const todoInputEl = document.getElementById("todo-input");
+            const addTodoBtnEl = document.getElementById("addTodoBtn");
+            if(!todoInputEl || !addTodoBtnEl) return;
+            addTodoBtnEl.addEventListener("click", () => {
+                let userInputValue = todoInputEl.value.trim();
+                userInputValue.length < 1 ? alert("Empty Input Not added.") : addTodo(userInputValue);
+                todoInputEl.value = "";
+            });
+        };todoManager();
+    </script>
+</body>
+</html>
