@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient In CSS</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .generate-button {
+            font-size: 20px;
+            padding: 8px 3rem;
+            border-radius: 20px;
+            background-color: #009eb9;
+            cursor: pointer;
+        }
+        .generate-button:hover {
+            background-color: #0ada;
+        }
+        .buttons-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 0 0 4rem;
+        }
+        p {
+            margin: 0 0 1rem;
+        }
+        .color-code {
+            padding: 1.5rem 1rem;
+            border-left: 2px solid #009eb9;
+            backdrop-filter: blur(20px);
+            background-image: linear-gradient(#6d6d6d, #5c5c5c);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons-container">
+            <button class="generate-button">#000000</button>
+            <button class="generate-button">#000000</button>
+        </div>
+        <p>Copy your code here</p>
+        <h4 class="color-code">background-image: linear-gradient(to right, #000, #000);</h4>
+    </div>
+    <script>
+        const showColorCodeEl = document.querySelector(".color-code");
+        const generate = () => {
+            let value = "0123456789abcdef";
+            let filter = "";
+            for(let i = 0; i <= 5; i++) {
+                filter += value[Math.floor(Math.random() * 15)];
+            }
+            return filter;
+        };
+        const copyListener = () => {
+            showColorCodeEl.addEventListener("click", (e) => {
+                navigator.clipboard.writeText(showColorCodeEl.textContent);
+                alert("Copied in your clipboard");
+            })
+        }
+        const generateManager = () => {
+            const generateButtonEl = document.querySelectorAll(".generate-button");
+            generateButtonEl.forEach(curEl => {
+                curEl.addEventListener("click", () => {
+                    let color1 = generate();
+                    let color2 = generate();
+                    document.body.style.backgroundImage = `linear-gradient(to right, #${color1}, #${color2})`;
+                    curEl.textContent = `#${color1}`;
+                    showColorCodeEl.textContent = `background-image: linear-gradient(to right, #${color1}, #${color2})`;
+                });
+            })
+            copyListener();
+        }; generateManager()
+    </script>
+</body>
+</html>
