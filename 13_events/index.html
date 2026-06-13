@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>Inline Event</h2>
+        <button onclick="alert('Hello')">Greeting</button>
+        <button ondblclick="alert('Hello')">Greeting again</button>
+        <button onmouseover="alert('Hello')">Greeting again</button>
+    </div>
+    <div>
+        <h2>Dom Event handler</h2>
+        <button id="btn1">Greeting</button>
+        <button id="btn2">Greeting again</button>
+    </div>
+    <div>
+        <h2>addEventListener</h2>
+        <button id="eventBtn1">greeting</button>
+        <button id="eventBtn2">Greeting again</button>
+    </div>
+
+    <script>
+        document.getElementById("btn1").onclick = () => {
+            alert("Hello");
+        }
+        document.getElementById("btn2").onmouseover = () => {
+            alert("Hello");
+        }
+    </script>
+    <script src="./events.js"></script>
+</body>
+</html>

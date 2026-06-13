@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input Events</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #000;
+            height: 100vh;
+            padding: 10rem 0 0;
+            color: #fff;
+        }
+        .container {
+            flex-direction: column;
+            gap: 20px;
+        }
+        input {
+            width: 500px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #5ec4ff;
+            border-radius: 20px;
+            margin: 0 0 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="myInput" placeholder="Type something..." name="name">
+        <p class="inputValue">Input Value:</p>
+        <p class="inputName">Input Name:</p>
+        <p class="inputType">Input Type:</p>
+        <p class="eventType">Event type:</p>
+    </div>
+    <script>
+        document.querySelector("#myInput").addEventListener("input", (e) => {
+            document.querySelector(".inputValue").textContent = `Input Value: ${document.querySelector("#myInput").value}`;
+            document.querySelector(".inputName").textContent = `Input Name: ${e.target.name}`;
+            document.querySelector(".inputType").textContent = `Input Type: ${e.inputType}`;
+            document.querySelector(".eventType").textContent = `Event type: ${e.type}`;
+        });
+    </script>
+</body>
+</html>

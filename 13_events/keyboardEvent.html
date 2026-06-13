@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Events</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #000;
+            height: 100vh;
+            padding: 10rem 0 0;
+            color: #fff;
+        }
+        .container {
+            flex-direction: column;
+            gap: 20px;
+        }
+        input {
+            width: 500px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #5ec4ff;
+            border-radius: 20px;
+            margin: 0 0 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="myInput" placeholder="Type something...">
+        <p class="keyPressed">Key pressed:</p>
+        <p class="keyCode">Key code:</p>
+        <p class="charCodeAt">Char codeAt:</p>
+        <p class="eventType">Event type:</p>
+    </div>
+    <script>
+        document.querySelector("#myInput").addEventListener("keyup", (e) => {
+            document.querySelector(".keyPressed").textContent = `Key pressed: ${e.key}`;
+            document.querySelector(".keyCode").textContent = `Key code: ${e.code}`;
+            document.querySelector(".charCodeAt").textContent = `Key codeAt: ${e.key.charCodeAt(0)}`;
+            document.querySelector(".eventType").textContent = `Event type: ${e.type}`;
+        });
+    </script>
+</body>
+</html>

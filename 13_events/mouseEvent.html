@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .box {
+            height: 300px;
+            width: 300px;
+            background: #ffff00;
+            transition: all 500ms ease;
+        }
+        .box.onHover {
+            transform: translateX(-200px);
+            border-radius: 50%;
+
+        }
+        .box.onClick {
+            background-color: #ffc31f;
+            border-radius: 50%;
+        }
+        .box.doubleClick  {
+            background-color: #1dddff;
+            border-radius: 50%;
+        }
+        button {
+            width: fit-content;
+            margin: 0 auto;
+            cursor: pointer;
+            padding: .7rem 2rem;
+            border-radius: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <button id="click-me__btn">Click me</button>
+    </div>
+    <script>
+        // document.querySelector("#click-me__btn").addEventListener("mousedown", () => document.querySelector(".box").classList.add("onClick"));
+        // document.querySelector("#click-me__btn").addEventListener("mouseup", () => document.querySelector(".box").classList.remove("onClick"));
+        // document.querySelector(".box").addEventListener("mouseover", () => document.querySelector(".box").classList.add("onHover"));
+        // document.querySelector(".box").addEventListener("mouseout", () => document.querySelector(".box").classList.remove("onHover"));
+        // document.querySelector(".box").addEventListener("dblclick", () => document.querySelector(".box").classList.add("doubleClick"));
+    </script>
+</body>
+</html>
