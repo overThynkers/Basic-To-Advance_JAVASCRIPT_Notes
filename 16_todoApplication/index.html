@@ -109,7 +109,8 @@
                 item.classList.toggle("active");
                 if(e.target.classList.contains("delete-todo")) {
                     let paragraphEl = e.target.previousElementSibling;
-                    let indexOfElement = todos.indexOf(paragraphEl.textContent.toLowerCase());
+                    let indexOfElement = todos.indexOf(paragraphEl.textContent);
+                    if(indexOfElement === -1)
                     todos.splice(indexOfElement, 1);
                     window.localStorage.setItem("todosData", JSON.stringify(todos));
                     e.target.parentElement.remove();
